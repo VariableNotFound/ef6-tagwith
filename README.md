@@ -1,6 +1,6 @@
 # EF6-TagWith
 
-Tag your to Entity Framework 6 LINQ queries, and see these tags in the SQL commands sent to the database. This will allow you to easily 
+Tag your Entity Framework 6 LINQ queries, and see these tags in the SQL commands sent to the database. This will allow you to easily 
 identify queries while using tools like SQL Profiler or Azure's performance and diagnostic features.
 
 (Yes, it is a simple implementation of [Entity Framework Core's query tags feature](https://docs.microsoft.com/en-us/ef/core/querying/tags).)
