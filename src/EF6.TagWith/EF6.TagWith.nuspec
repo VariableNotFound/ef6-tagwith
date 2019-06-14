@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>EF6.TagWith</id>
+    <title>EF6.TagWith</title>
+    <version>$version$</version>
+    <authors>José María Aguilar</authors>
+    <owners>jmaguilar</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/VariableNotFound/ef6-tagwith</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Tag Entity Framework 6 LINQ queries</description>
+    <releaseNotes>Initial version.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <repository type="git" url="https://github.com/VariableNotFound/ef6-tagwith" />
+    <tags>ef entityframework ef6 entityframework6</tags>
+    <dependencies>
+      <dependency id="EntityFramework" version="6.2.0" />
+    </dependencies>
+  </metadata>
+</package>
