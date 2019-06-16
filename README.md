@@ -42,10 +42,12 @@ ORDER BY [friend].[Age] DESC
 
 ## How this works
 
-The `TagWith()` extension method adds a special predicate to the query, so it can be easily identified in the final SQL. Later on, just before sending the SQL command to the database, we use EF 6 interceptors to extract this predicate and insert the tag as a comment, just using a bit of string wizardry.
+The `TagWith()` extension method adds a special predicate to the query, so it can be easily identified in the final SQL. 
+
+Later on, just before sending the SQL command to the database, we use EF 6 interceptors to extract this predicate and insert the tag as a comment, just using a bit of string wizardry.
 
 ## Known issues
 
-* The component only supports SQL Server, but can be easily adapted to support another providers.
+* The component only supports SQL Server, but can be easily adapted to support another providers just creating a new implementation of `ISqlTagger` and use it in the interceptor configuration.
 
 
