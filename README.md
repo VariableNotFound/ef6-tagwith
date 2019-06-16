@@ -5,12 +5,19 @@ identify queries while using tools like SQL Profiler or Azure's performance and 
 
 (Yes, it is a simple implementation of [Entity Framework Core's query tags feature](https://docs.microsoft.com/en-us/ef/core/querying/tags).)
 
-## Usage
+## Usage (SQL Server)
 
 1. Install the NuGet package in your project.
 
 ```
-PM> install-package EF6-TagWith
+PM> install-package EF6.TagWith
+```
+
+2. Add the query interceptor. The easiest way is just to add the following code
+   somewhere in your application startup code:
+
+```cs
+DbInterception.Add(new QueryTaggerInterceptor(new SqlServerTagger());
 ```
 
 2. Tag your queries this way:
@@ -37,6 +44,8 @@ ORDER BY [friend].[Age] DESC
 
 The `TagWith()` extension method adds a special predicate to the query, so it can be easily identified in the final SQL. Later on, just before sending the SQL command to the database, we use EF 6 interceptors to extract this predicate and insert the tag as a comment, just using a bit of string wizardry.
 
+## Known issues
 
+* The component only supports SQL Server.
 
 
