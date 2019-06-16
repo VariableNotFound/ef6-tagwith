@@ -17,7 +17,7 @@ PM> install-package EF6.TagWith
    somewhere in your application startup code:
 
 ```cs
-DbInterception.Add(new QueryTaggerInterceptor(new SqlServerTagger());
+DbInterception.Add(new QueryTaggerInterceptor(new SqlServerTagger()));
 ```
 
 2. Tag your queries this way:

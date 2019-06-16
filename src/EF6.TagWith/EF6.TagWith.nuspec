@@ -15,7 +15,7 @@
     <repository type="git" url="https://github.com/VariableNotFound/ef6-tagwith" />
     <tags>ef entityframework ef6 entityframework6</tags>
     <dependencies>
-      <dependency id="EntityFramework" version="6.2.0" />
+      <dependency id="EntityFramework" version="6.0.0" />
     </dependencies>
   </metadata>
 </package>
