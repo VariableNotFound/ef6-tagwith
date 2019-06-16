@@ -46,6 +46,6 @@ The `TagWith()` extension method adds a special predicate to the query, so it ca
 
 ## Known issues
 
-* The component only supports SQL Server.
+* The component only supports SQL Server, but can be easily adapted to support another providers.
 
 
