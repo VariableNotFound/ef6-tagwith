@@ -25,10 +25,13 @@ namespace EF6.TagWith
         }
         public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> context)
         {
-            do
+            while(true)
             {
-                command.CommandText = _sqlTagger.GetTaggedSqlQuery(command.CommandText);
-            } while (command.CommandText.IndexOf(TagWithExtensions.TagMarker, StringComparison.Ordinal) > -1);
+                var newSqlQuery = _sqlTagger.GetTaggedSqlQuery(command.CommandText);
+                if (newSqlQuery.Equals(command.CommandText))    // The query didn't change,
+                    break;                                      // so it is not tagged
+                command.CommandText = newSqlQuery;
+            }
             _sqlWriter?.Invoke(command.CommandText);
         }
     }
