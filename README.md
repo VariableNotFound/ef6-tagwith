@@ -20,7 +20,7 @@ PM> install-package EF6.TagWith
 DbInterception.Add(new QueryTaggerInterceptor(new SqlServerTagger()));
 ```
 
-2. Tag your queries this way:
+3. Tag your queries this way:
 
 ```cs
 var query = context.Friends
@@ -29,7 +29,7 @@ var query = context.Friends
     .Select(friend => new { FriendName = friend.Name, friend.Age, CountryName = friend.Country.Name })
     .TagWith("Get top 10 older friends with country");
 ```
-3. The query sent to the database will be as follows:
+4. The query sent to the database will be as follows:
 ```sql
 -- Get top 10 older friends with country
 
@@ -48,6 +48,6 @@ Later on, just before sending the SQL command to the database, we use EF 6 inter
 
 ## Known issues
 
-* The component only supports SQL Server, but can be easily adapted to support another providers just creating a new implementation of `ISqlTagger` and use it in the interceptor configuration.
+* The component only supports SQL Server, but can be easily adapted to support another providers just creating a new implementation of `ISqlTagger` and using it in the interceptor configuration.
 
 
