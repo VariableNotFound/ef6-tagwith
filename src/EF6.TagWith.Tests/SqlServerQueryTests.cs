@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using EF6.TagWith.Tests.Data;
@@ -28,6 +27,24 @@ namespace EF6.TagWith.Tests
             var items = _ctx.Friends.TagWith(tag).ToList();
             Assert.True(IsSqlTagged(_lastSql, tag));
             Assert.False(SqlContainsMarkerPredicate(_lastSql, tag));
+        }
+
+        [Fact]
+        public void QueryOnlyMultipleTagWiths()
+        {
+            var tag1 = nameof(QueryOnlyMultipleTagWiths);
+            var tag2 = "Second tag";
+
+            var query = _ctx.Friends
+                .TagWith(tag1)
+                .TagWith(tag2)
+                .ToList();
+
+            Assert.True(IsSqlTagged(_lastSql, tag1));
+            Assert.True(IsSqlTagged(_lastSql, tag2));
+            Assert.False(SqlContainsMarkerPredicate(_lastSql, tag1));
+            Assert.False(SqlContainsMarkerPredicate(_lastSql, tag2));
+            Assert.StartsWith($"-- {tag1}\n-- {tag2}\n", _lastSql);
         }
 
         [Fact]
