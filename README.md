@@ -7,7 +7,7 @@ identify queries while using tools like SQL Profiler or Azure's performance and 
 
 ## Usage (SQL Server)
 
-1. Install the NuGet package in your project.
+1. Install the [NuGet package](https://www.nuget.org/packages/EF6.TagWith/) in your project.
 
 ```
 PM> install-package EF6.TagWith
@@ -50,4 +50,11 @@ Later on, just before sending the SQL command to the database, we use EF 6 inter
 
 * The component only supports SQL Server, but can be easily adapted to support another providers just creating a new implementation of `ISqlTagger` and using it in the interceptor configuration.
 
+## Contributions
 
+Feel free to send issues, comments or pull requests. The following users have contributed to this project so far:
+
+* [José M. Aguilar](https://github.com/jmaguilar)
+* [Henry Malthus](https://github.com/henrym)
+
+Thank you!
