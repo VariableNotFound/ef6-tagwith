@@ -20,8 +20,10 @@ namespace EF6.TagWith
 
             var tag = sql.Substring(startOfTagIndex, endOfTagIndex - startOfTagIndex + 1);
 
-            var startsWithAnd = CmpStr(sql, predicateStartIndex - 5, "AND (");
-            var endsWithAnd = CmpStr(sql, endOfTagIndex + 2, ") AND");
+            const string startingAnd = "AND (";
+            var startsWithAnd = StringIsAtIndex(sql, predicateStartIndex - 5, startingAnd);
+            const string endingAnd = ") AND";
+            var endsWithAnd = StringIsAtIndex(sql, endOfTagIndex + 2, endingAnd);
 
             string finalSql;
             if (startsWithAnd)
@@ -39,8 +41,13 @@ namespace EF6.TagWith
             else
             {
                 // It is the only predicate, so remove the whole "Where" section
-                finalSql = sql.Substring(0, indexOfTagConstant - 8)
-                           + sql.Substring(predicateEndIndex + 1);
+
+                // In some cases the predicate can be wrapped with parentheses even if it's the only predicate left in
+                // the query
+                var hasParens = StringIsAtIndex(sql, predicateStartIndex - 1, "(");
+                var startIndex = indexOfTagConstant - (hasParens ? 9 : 8);
+                var endIndex = predicateEndIndex + (hasParens ? 2 : 1);
+                finalSql = sql.Substring(0, startIndex) + sql.Substring(endIndex);
             }
 
             finalSql = AddTagToQuery(finalSql, tag);
@@ -68,19 +75,11 @@ namespace EF6.TagWith
             return sql;
         }
 
-        private static bool CmpStr(string str, int startIndex, string compare)
+        private static bool StringIsAtIndex(string str, int startIndex, string compare)
         {
-            var index = 0;
-            if (index + startIndex >= str.Length)
+            if (startIndex + compare.Length > str.Length)
                 return false;
-
-            while ((index+startIndex) < str.Length && index < compare.Length)
-            {
-                if (str[index + startIndex] != compare[index])
-                    return false;
-                index++;
-            }
-            return true;
+            return str.IndexOf(compare, startIndex, compare.Length) == startIndex;
         }
     }
 }
