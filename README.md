@@ -49,7 +49,7 @@ Later on, just before sending the SQL command to the database, we use EF 6 inter
 ## Known issues
 
 * The component only supports SQL Server, but can be easily adapted to support another providers just creating a new implementation of `ISqlTagger` and using it in the interceptor configuration.
-* If you are mocking a `DbSet` that is queried using `TagWith()` you may find issues. Please read this [Jean-Sébastien Goupil](https://github.com/jsgoupil) issue where he shows how to solve it.
+* If you are mocking a `DbSet` that is queried using `TagWith()` you may find problems. Please read [this issue](https://github.com/VariableNotFound/ef6-tagwith/issues/4) from [@jsgoupil](https://github.com/jsgoupil) to see how to solve it.
 
 ## Contributions
 

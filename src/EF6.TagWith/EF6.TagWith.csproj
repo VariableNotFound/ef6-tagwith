@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net40;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.0-preview1</Version>
+    <Version>1.1.0-preview2</Version>
     <Authors>José M. Aguilar</Authors>
     <Company>Variable not found</Company>
     <Description>Tag Entity Framework 6 LINQ queries</Description>
@@ -17,7 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.0.0" />
+    <PackageReference Include="EntityFramework" Version="6.0.0" Condition="'$(TargetFramework)' == 'net40'" />
+    <PackageReference Include="EntityFramework" Version="6.4.0" Condition="'$(TargetFramework)' == 'netstandard2.1'" />
   </ItemGroup>
 
 </Project>
