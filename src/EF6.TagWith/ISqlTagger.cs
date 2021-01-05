@@ -2,6 +2,6 @@
 {
     public interface ISqlTagger
     {
-        string GetTaggedSqlQuery(string sql);
+        string GetTaggedSqlQuery(string sql, TaggingOptions options);
     }
 }

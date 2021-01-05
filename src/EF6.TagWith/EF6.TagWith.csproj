@@ -3,17 +3,20 @@
   <PropertyGroup>
     <TargetFrameworks>net40;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.0-preview2</Version>
+    <Version>1.2</Version>
     <Authors>José M. Aguilar</Authors>
     <Company>Variable not found</Company>
     <Description>Tag Entity Framework 6 LINQ queries</Description>
-    <Copyright>© 2020</Copyright>
+    <Copyright>© 2021</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/VariableNotFound/ef6-tagwith</PackageProjectUrl>
     <RepositoryUrl>https://github.com/VariableNotFound/ef6-tagwith</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>ef entityframework ef6 entityframework6</PackageTags>
-    <PackageReleaseNotes>.NET Standard compatibility</PackageReleaseNotes>
+    <PackageReleaseNotes>Added in this release:
+- .NET Standard compatibility. 
+- Improved API to add interceptors easier
+- Support for infix tags</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -12,22 +12,28 @@ namespace EF6.TagWith
     {
         private readonly ISqlTagger _sqlTagger;
         private readonly Action<string> _sqlWriter = null;
+        private readonly TaggingOptions _options;
 
         public QueryTaggerInterceptor(ISqlTagger sqlTagger)
         {
             _sqlTagger = sqlTagger;
+            TagWith.IsInitialized = true;
         }
 
-        internal QueryTaggerInterceptor(ISqlTagger sqlTagger, Action<string> sqlWriter)
+        public QueryTaggerInterceptor(ISqlTagger sqlTagger, TaggingOptions options): this(sqlTagger)
         {
-            _sqlTagger = sqlTagger;
+            _options = options;
+        }
+
+        internal QueryTaggerInterceptor(ISqlTagger sqlTagger, TaggingOptions options, Action<string> sqlWriter): this(sqlTagger, options)
+        {
             _sqlWriter = sqlWriter;
         }
         public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> context)
         {
             while(true)
             {
-                var newSqlQuery = _sqlTagger.GetTaggedSqlQuery(command.CommandText);
+                var newSqlQuery = _sqlTagger.GetTaggedSqlQuery(command.CommandText, _options);
                 if (newSqlQuery.Equals(command.CommandText))    // The query didn't change,
                     break;                                      // so it is not tagged
                 command.CommandText = newSqlQuery;
