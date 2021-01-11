@@ -20,7 +20,7 @@ identify queries while using tools like SQL Profiler or Azure's performance and 
     DbInterception.Add(new QueryTaggerInterceptor(new SqlServerTagger()));
     ```
 
-    Starting at version 1.2, you may also use the `TagWith.Initialize` helper method as follows:
+    Starting at version 1.2, you may also use the `TagWith.Initialize()` helper method as follows:
 
     ```cs
     TagWith.Initialize<SqlServerTagger>();
@@ -66,17 +66,15 @@ By default, TagWith inserts the tags _before the SQL command_. However, there ar
 
 For example, the above SQL command would look like this:
 
-```SQL
-    ```sql
-    SELECT -- Get top 10 older friends with country
+```sql
+SELECT -- Get top 10 older friends with country
 
-    TOP(@__p_0) [friend].[Name] AS [FriendName], [friend].[Age], 
-                       [friend.Country].[Name] AS [CountryName]
-    FROM [Friends] AS [friend]
-    LEFT JOIN [Countries] AS [friend.Country] 
-         ON [friend].[CountryId] = [friend.Country].[Id]
-    ORDER BY [friend].[Age] DESC
-    ```
+TOP(@__p_0) [friend].[Name] AS [FriendName], [friend].[Age], 
+                    [friend.Country].[Name] AS [CountryName]
+FROM [Friends] AS [friend]
+LEFT JOIN [Countries] AS [friend.Country] 
+        ON [friend].[CountryId] = [friend.Country].[Id]
+ORDER BY [friend].[Age] DESC
 ```
 
 The "infix" mode must be specified during the component initialization this way:
@@ -107,14 +105,15 @@ private List<Friend> GetFriends()
 Then, the SQL query sent to the database will be as follows:
 
 ```sql
--- Getting friends - GetFriends - C:\Users\jmaguilar\source\repos\TagWithTests\TagWithDemo\FriendRepository.cs:20
+-- Getting friends - GetFriends - C:\repos\TagWithDemo\FriendRepository.cs:20
 SELECT 
     [Limit1].[Id] AS [Id], 
     [Limit1].[Name] AS [Name], 
     [Limit1].[Country_Id] AS [Country_Id]
-    FROM ( SELECT TOP (10) [Extent1].[Id] AS [Id], [Extent1].[Name] AS [Name], [Extent1].[Country_Id] AS [Country_Id]
-        FROM [dbo].[Friends] AS [Extent1]
-        ORDER BY [Extent1].[Name] ASC
+    FROM ( SELECT TOP (10) [Extent1].[Id] AS [Id], [Extent1].[Name] AS [Name],
+           [Extent1].[Country_Id] AS [Country_Id]
+           FROM [dbo].[Friends] AS [Extent1]
+           ORDER BY [Extent1].[Name] ASC
     )  AS [Limit1]
     
     ORDER BY [Limit1].[Name] ASC
