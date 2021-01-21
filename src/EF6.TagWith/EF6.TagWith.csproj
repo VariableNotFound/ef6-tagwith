@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net40;net45;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.2</Version>
     <Authors>José M. Aguilar</Authors>
@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.0.0" Condition="'$(TargetFramework)' == 'net40'" />
+    <PackageReference Include="EntityFramework" Version="6.0.0" Condition="'$(TargetFramework)' == 'net45'" />
     <PackageReference Include="EntityFramework" Version="6.4.0" Condition="'$(TargetFramework)' == 'netstandard2.1'" />
   </ItemGroup>
 
