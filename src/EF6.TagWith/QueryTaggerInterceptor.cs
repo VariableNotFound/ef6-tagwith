@@ -12,7 +12,7 @@ namespace EF6.TagWith
     {
         private readonly ISqlTagger _sqlTagger;
         private readonly Action<string> _sqlWriter = null;
-        private readonly TaggingOptions _options;
+        private readonly TaggingOptions _options = new TaggingOptions();
 
         public QueryTaggerInterceptor(ISqlTagger sqlTagger)
         {
