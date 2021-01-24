@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net40;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2</Version>
+    <Version>1.2.1</Version>
     <Authors>José M. Aguilar</Authors>
     <Company>Variable not found</Company>
     <Description>Tag Entity Framework 6 LINQ queries</Description>
@@ -14,9 +14,8 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>ef entityframework ef6 entityframework6</PackageTags>
     <PackageReleaseNotes>Added in this release:
-- .NET Standard compatibility. 
-- Improved API to add interceptors easier
-- Support for infix tags</PackageReleaseNotes>
+      - Bug fixes
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

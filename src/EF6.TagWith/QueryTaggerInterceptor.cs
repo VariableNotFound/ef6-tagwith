@@ -11,23 +11,19 @@ namespace EF6.TagWith
     public class QueryTaggerInterceptor : DbCommandInterceptor
     {
         private readonly ISqlTagger _sqlTagger;
-        private readonly Action<string> _sqlWriter = null;
-        private readonly TaggingOptions _options = new TaggingOptions();
+        private readonly Action<string> _sqlWriter;
+        private readonly TaggingOptions _options;
 
-        public QueryTaggerInterceptor(ISqlTagger sqlTagger)
+        public QueryTaggerInterceptor(ISqlTagger sqlTagger, TaggingOptions options = null)
         {
-            _sqlTagger = sqlTagger;
+            _sqlTagger = sqlTagger ?? throw new ArgumentNullException(nameof(sqlTagger));
+            _options = options ?? new TaggingOptions();
             TagWith.IsInitialized = true;
-        }
-
-        public QueryTaggerInterceptor(ISqlTagger sqlTagger, TaggingOptions options): this(sqlTagger)
-        {
-            _options = options;
         }
 
         internal QueryTaggerInterceptor(ISqlTagger sqlTagger, TaggingOptions options, Action<string> sqlWriter): this(sqlTagger, options)
         {
-            _sqlWriter = sqlWriter;
+            _sqlWriter = sqlWriter ?? throw new ArgumentNullException(nameof(sqlWriter));
         }
         public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> context)
         {
