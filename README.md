@@ -136,5 +136,6 @@ Feel free to send issues, comments or pull requests. The following users have co
 
 * [José M. Aguilar](https://github.com/jmaguilar)
 * [Henry Malthus](https://github.com/henrym)
+* [Željko Brkić](https://github.com/zbrkic)
 
 Thank you!
