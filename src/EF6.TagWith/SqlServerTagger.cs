@@ -7,6 +7,7 @@ namespace EF6.TagWith
     {
         public string GetTaggedSqlQuery(string sql, TaggingOptions options)
         {
+            var comparisonOperatorLength = options.PredicateExpression == PredicateExpression.Equals ? 1 : 2;
             var indexOfTagConstant = sql.IndexOf(
                 TagWithExtensions.TagMarker, StringComparison.Ordinal
             );
@@ -14,7 +15,7 @@ namespace EF6.TagWith
                 return sql;
 
             var predicateStartIndex = indexOfTagConstant - 2;
-            var startOfTagIndex = predicateStartIndex + TagWithExtensions.TagMarker.Length + 8;
+            var startOfTagIndex = predicateStartIndex + TagWithExtensions.TagMarker.Length + 8 + (comparisonOperatorLength-1);
 
             var predicateEndIndex = sql.IndexOf("'", startOfTagIndex, StringComparison.Ordinal);
             var endOfTagIndex = predicateEndIndex - 1; // Remove the final single quote

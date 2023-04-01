@@ -19,11 +19,27 @@ namespace EF6.TagWith
             EnsureTagIsValid(tag);
             var tagConstant = Expression.Constant(TagMarker);
             var tagValue = Expression.Constant(tag);
-            var equalsExpression = Expression.Equal(tagConstant, tagValue);
+            
+            var comparisonExpression = GetComparisonExpression(tagConstant, tagValue);
             var predicate = Expression.Lambda<Func<T, bool>>(
-                equalsExpression, Expression.Parameter(typeof(T))
+                comparisonExpression, Expression.Parameter(typeof(T))
             );
             return query.Where(predicate);
+        }
+
+        private static BinaryExpression GetComparisonExpression(ConstantExpression tagConstant, ConstantExpression tagValue)
+        {
+            var predicateExpression = EF6.TagWith.TagWith.Options?.PredicateExpression ?? PredicateExpression.Equals;
+            switch (predicateExpression)
+            {
+                case PredicateExpression.Equals:
+                    return Expression.Equal(tagConstant, tagValue);
+                case PredicateExpression.NotEquals:
+                    return Expression.NotEqual(tagConstant, tagValue);
+                default:
+                    throw new NotImplementedException(
+                        $"The predicate type {EF6.TagWith.TagWith.Options.PredicateExpression} is not implemented");
+            }
         }
 
         private static void EnsureTagWithIsConfigured()

@@ -19,12 +19,16 @@ namespace EF6.TagWith
             _sqlTagger = sqlTagger ?? throw new ArgumentNullException(nameof(sqlTagger));
             _options = options ?? new TaggingOptions();
             TagWith.IsInitialized = true;
+            TagWith.Options = options;
         }
 
         internal QueryTaggerInterceptor(ISqlTagger sqlTagger, TaggingOptions options, Action<string> sqlWriter): this(sqlTagger, options)
         {
             _sqlWriter = sqlWriter ?? throw new ArgumentNullException(nameof(sqlWriter));
+            TagWith.IsInitialized = true;
+            TagWith.Options = options;
         }
+
         public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> context)
         {
             while(true)

@@ -1,7 +1,7 @@
 ﻿namespace EF6.TagWith
 {
     /// <summary>
-    /// Defines how the tag should be added to the SQL query
+    /// Specifies the expression of the predicate that will be used to identify the query
     /// </summary>
     public enum TagMode
     {

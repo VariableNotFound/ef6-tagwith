@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFrameworks>net40;net45;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <Authors>José M. Aguilar</Authors>
     <Company>Variable not found</Company>
     <Description>Tag Entity Framework 6 LINQ queries</Description>
-    <Copyright>© 2021</Copyright>
+    <Copyright>© 2023</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/VariableNotFound/ef6-tagwith</PackageProjectUrl>
     <RepositoryUrl>https://github.com/VariableNotFound/ef6-tagwith</RepositoryUrl>

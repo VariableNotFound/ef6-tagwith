@@ -26,6 +26,8 @@ identify queries while using tools like SQL Profiler or Azure's performance and 
     TagWith.Initialize<SqlServerTagger>();
     ```
 
+    This method is the recommended option because it allows you to specify some tagging options, as explained below.
+
 3. Use the `TagWith()` extension to tag your queries:
 
     ```cs
@@ -85,6 +87,55 @@ TagWith.Initialize<SqlServerTagger>(
         TagMode = TagMode.Infix 
     });
 ```
+
+## Predicate expression
+
+By default, the predicate included in the query specification when you use the method `TagWith()` looks like this:
+
+```cs
+// LINQ query:
+var query = _ctx.Friends.TagWith("My friends").Where(f => f.Id < 10);
+Console.WriteLine(query.ToString());
+
+// Output:
+SELECT 
+    [Extent1].[Id] AS [Id], 
+    [Extent1].[Name] AS [Name], 
+    [Extent1].[Country_Id] AS [Country_Id]
+    FROM [dbo].[Friends] AS [Extent1]
+    WHERE (N'!__tag!' = N'My friends') AND ([Extent1].[Id] < 10)
+```
+
+Later on, just before the query is sent to the database, the predicate will be removed and 
+the tag will be added as a comment.
+
+As suggested by [d-a-s](https://github.com/d-a-s), the problem with this approach is that if you try to get the SQL using `ToString()`, as seen above, and try to execute it against the database, you'll never get any results because the predicate is always evaluated as `false`.
+
+Starting at version 1.2.2, you can change this behaviour by specifying a different predicate expression during the component initialization.
+
+```cs
+TagWith.Initialize<SqlServerTagger>(
+    new TaggingOptions() { 
+        PredicateExpression = PredicateExpression.NotEquals
+    });
+```
+
+In this case, the query specification will be as follows, so you could run it against the database because the inserted predicate will be always `true` (note the distinct '<>' operator usage):
+
+```cs
+// LINQ query:
+var query = _ctx.Friends.TagWith("My friends").Where(f => f.Id < 10);
+Console.WriteLine(query.ToString());
+
+// Output:
+SELECT 
+    [Extent1].[Id] AS [Id], 
+    [Extent1].[Name] AS [Name], 
+    [Extent1].[Country_Id] AS [Country_Id]
+    FROM [dbo].[Friends] AS [Extent1]
+    WHERE (N'!__tag!' <> N'My friends') AND ([Extent1].[Id] < 10)
+```
+
 
 ## Another tagging options
 
