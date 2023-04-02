@@ -1,27 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net40;net45;netstandard2.1</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.2-preview1</Version>
-    <Authors>José M. Aguilar</Authors>
-    <Company>Variable not found</Company>
-    <Description>Tag Entity Framework 6 LINQ queries</Description>
-    <Copyright>© 2023</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/VariableNotFound/ef6-tagwith</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/VariableNotFound/ef6-tagwith</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageTags>ef entityframework ef6 entityframework6</PackageTags>
-    <PackageReleaseNotes>Added in this release:
-      - Bug fixes
-    </PackageReleaseNotes>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net40;net45;netstandard2.1</TargetFrameworks>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>1.3.0-preview1</Version>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Authors>José M. Aguilar</Authors>
+		<Company>Variable not found</Company>
+		<Description>Tag Entity Framework 6 LINQ queries</Description>
+		<Copyright>© 2023</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/VariableNotFound/ef6-tagwith</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/VariableNotFound/ef6-tagwith</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>ef entityframework ef6 entityframework6</PackageTags>
+		<PackageReleaseNotes>
+			Added in this release:
+			- Bug fixes
+		</PackageReleaseNotes>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.0.0" Condition="'$(TargetFramework)' == 'net40'" />
-    <PackageReference Include="EntityFramework" Version="6.0.0" Condition="'$(TargetFramework)' == 'net45'" />
-    <PackageReference Include="EntityFramework" Version="6.4.0" Condition="'$(TargetFramework)' == 'netstandard2.1'" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="EntityFramework" Version="6.0.0" Condition="'$(TargetFramework)' == 'net40'" />
+		<PackageReference Include="EntityFramework" Version="6.0.0" Condition="'$(TargetFramework)' == 'net45'" />
+		<PackageReference Include="EntityFramework" Version="6.4.0" Condition="'$(TargetFramework)' == 'netstandard2.1'" />
+	</ItemGroup>
 
 </Project>

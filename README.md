@@ -13,8 +13,7 @@ identify queries while using tools like SQL Profiler or Azure's performance and 
     PM> install-package EF6.TagWith
     ```
 
-2. Add the query interceptor. The easiest way is just to add the following code
-   somewhere in your application startup code:
+2. Add the query interceptor. The easiest way is just to add the following code somewhere in your application startup code:
 
     ```cs
     DbInterception.Add(new QueryTaggerInterceptor(new SqlServerTagger()));
@@ -106,12 +105,11 @@ SELECT
     WHERE (N'!__tag!' = N'My friends') AND ([Extent1].[Id] < 10)
 ```
 
-Later on, just before the query is sent to the database, the predicate will be removed and 
-the tag will be added as a comment.
+Later on, just before the query is sent to the database, the predicate will be removed and the tag will be added as a comment.
 
 As suggested by [d-a-s](https://github.com/d-a-s), the problem with this approach is that if you try to get the SQL using `ToString()`, as seen above, and try to execute it against the database, you'll never get any results because the predicate is always evaluated as `false`.
 
-Starting at version 1.2.2, you can change this behaviour by specifying a different predicate expression during the component initialization.
+Starting at version 1.3.0, you can change this behaviour by specifying a different predicate expression during the component initialization.
 
 ```cs
 TagWith.Initialize<SqlServerTagger>(
