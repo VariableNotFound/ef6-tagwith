@@ -16,7 +16,7 @@
 		<PackageTags>ef entityframework ef6 entityframework6</PackageTags>
 		<PackageReleaseNotes>
 			Added in this release:
-			- Bug fixes
+			- Allow changing predicate expressions
 		</PackageReleaseNotes>
 	</PropertyGroup>
 
