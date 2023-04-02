@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net40;net45;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.2</Version>
+    <Version>1.2.2-preview1</Version>
     <Authors>José M. Aguilar</Authors>
     <Company>Variable not found</Company>
     <Description>Tag Entity Framework 6 LINQ queries</Description>
